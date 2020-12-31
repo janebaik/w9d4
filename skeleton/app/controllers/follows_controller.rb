@@ -15,10 +15,13 @@ class FollowsController < ApplicationController
 
   def destroy
     # simulate latency
-    sleep(1)
 
+    sleep(1)
+    # debugger
     @follow = current_user.out_follows.find_by(followee_id: params[:user_id])
+    # debugger
     @follow.destroy!
+    # debugger
 
     respond_to do |format|
       format.html { redirect_to request.referrer }

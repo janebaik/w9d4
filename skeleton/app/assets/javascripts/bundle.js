@@ -30,16 +30,38 @@ class FollowToggle {
     return $.ajax({
       method: "POST",
       url: `/users/${id}/follow`,
+      dataType: "json",
+      success: function(res){
+       console.log(res)
+      }
     });
   }
+
+  deleteUser(id){
+    return $.ajax({
+      method: "DELETE",
+      url: `/users/${id}/follow`,
+      dataType:"json",
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  }
+
 
   handleClick() {
     this.$el.on("click", (e) => {
       // debugger;
       e.preventDefault();
       // debugger;
-      alert("line 23");
-      this.followUser(this.userId);
+      if(this.followState === "unfollowed"){
+        this.followUser(this.userId);
+        
+      }
+      else if (this.followState === "followed") {
+        // debugger
+        this.deleteUser(this.userId);
+      }
       // debugger;
     });
 
